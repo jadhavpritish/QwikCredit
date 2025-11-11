@@ -61,11 +61,11 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps = {}) {
   const selectedScenarioData = scenarios.find(s => s.id === selectedScenario);
 
   return (
-    <section className="min-h-screen bg-[#121212] relative overflow-hidden">
+    <section className="min-h-screen bg-[#121212] relative overflow-hidden pb-8">
       {/* Background gradient effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#CCA43B]/5 via-transparent to-transparent pointer-events-none" />
       
-      <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+      <div className="container mx-auto px-4 py-12 md:py-16 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
           <div className="text-center mb-10 space-y-4">

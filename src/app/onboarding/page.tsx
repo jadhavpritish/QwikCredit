@@ -4,22 +4,24 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Shield, Loader2, Sparkles, Trophy, Zap, CheckCircle2, X } from "lucide-react";
+import { ArrowRight, Shield, Loader2, Sparkles, Trophy, Zap, CheckCircle2, X, Calendar as CalendarIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
 
 export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
   
   // Form data
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
   const [fullName, setFullName] = useState("");
   const [pan, setPan] = useState("");
-  const [dob, setDob] = useState("");
+  const [dob, setDob] = useState<Date>();
   const [employmentType, setEmploymentType] = useState("");
   const [income, setIncome] = useState("");
 
@@ -41,11 +43,7 @@ export default function OnboardingPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false);
-        setStep(2);
-      }, 600);
+      setStep(2);
     }, 1000);
   };
 
@@ -53,11 +51,7 @@ export default function OnboardingPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false);
-        setStep(3);
-      }, 600);
+      setStep(3);
     }, 1000);
   };
 
@@ -65,11 +59,7 @@ export default function OnboardingPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false);
-        setStep(4);
-      }, 600);
+      setStep(4);
     }, 1000);
   };
 
@@ -165,19 +155,6 @@ export default function OnboardingPage() {
               >
                 {mascotEmojis[step - 1]}
               </motion.div>
-              <AnimatePresence>
-                {showSuccess && (
-                  <motion.div 
-                    className="absolute -top-2 -right-2"
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    exit={{ scale: 0, rotate: 180 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                  >
-                    <Sparkles className="h-6 w-6 text-[#CCA43B]" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
 
             {/* Mascot Message */}
@@ -467,12 +444,59 @@ export default function OnboardingPage() {
                     <label className="text-[#B3B3B3] text-sm mb-2 block">
                       Date of Birth
                     </label>
-                    <Input
-                      type="date"
-                      value={dob}
-                      onChange={(e) => setDob(e.target.value)}
-                      className="bg-[#121212] border-[#2A2A2A] text-white text-sm focus:border-[#CCA43B] focus:ring-2 focus:ring-[#CCA43B]/20 transition-all"
-                    />
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={`w-full justify-start text-left font-normal bg-[#121212] border-[#2A2A2A] hover:bg-[#1E1E1E] hover:border-[#CCA43B] text-sm ${
+                            !dob && "text-[#808080]"
+                          }`}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {dob ? format(dob, "PPP") : "Pick your date of birth"}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0 bg-[#1E1E1E] border-[#2A2A2A]" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={dob}
+                          onSelect={setDob}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                          captionLayout="dropdown-buttons"
+                          fromYear={1950}
+                          toYear={new Date().getFullYear()}
+                          classNames={{
+                            months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+                            month: "space-y-4",
+                            caption: "flex justify-center pt-1 relative items-center",
+                            caption_label: "text-sm font-medium text-white",
+                            caption_dropdowns: "flex justify-center gap-1",
+                            nav: "space-x-1 flex items-center",
+                            nav_button: "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 text-white",
+                            nav_button_previous: "absolute left-1",
+                            nav_button_next: "absolute right-1",
+                            table: "w-full border-collapse space-y-1",
+                            head_row: "flex",
+                            head_cell: "text-[#B3B3B3] rounded-md w-9 font-normal text-[0.8rem]",
+                            row: "flex w-full mt-2",
+                            cell: "text-center text-sm p-0 relative [&:has([aria-selected])]:bg-[#CCA43B]/10 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                            day: "h-9 w-9 p-0 font-normal text-white hover:bg-[#2A2A2A] rounded-md aria-selected:opacity-100",
+                            day_selected: "bg-[#CCA43B] text-white hover:bg-[#CCA43B] hover:text-white focus:bg-[#CCA43B] focus:text-white",
+                            day_today: "bg-[#2A2A2A] text-white",
+                            day_outside: "text-[#808080] opacity-50",
+                            day_disabled: "text-[#808080] opacity-50",
+                            day_range_middle: "aria-selected:bg-[#CCA43B]/10 aria-selected:text-white",
+                            day_hidden: "invisible",
+                            dropdown: "bg-[#121212] border border-[#2A2A2A] text-white text-sm rounded-md px-2 py-1",
+                            dropdown_month: "bg-[#121212] border border-[#2A2A2A] text-white",
+                            dropdown_year: "bg-[#121212] border border-[#2A2A2A] text-white",
+                          }}
+                        />
+                      </PopoverContent>
+                    </Popover>
                   </div>
 
                   <div>
@@ -602,27 +626,6 @@ export default function OnboardingPage() {
                   </p>
                 </div>
               </Card>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Success Badge Animation */}
-        <AnimatePresence>
-          {showSuccess && (
-            <motion.div 
-              className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                exit={{ scale: 0, rotate: 180 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              >
-                <Trophy className="h-20 w-20 text-[#CCA43B] drop-shadow-2xl" />
-              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

@@ -86,21 +86,21 @@ export default function ApplicationForm() {
 
   if (isSubmitted) {
     return (
-      <section id="apply-form" className="py-20 bg-[#121212]">
+      <section id="apply-form" className="py-12 bg-[#121212]">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto bg-[#1E1E1E] rounded-2xl p-12 text-center border border-[#CCA43B]/20">
-            <div className="w-20 h-20 rounded-full bg-[#2E7D32]/20 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="w-10 h-10 text-[#2E7D32]" />
+          <div className="max-w-2xl mx-auto bg-[#1E1E1E] rounded-2xl p-10 text-center border border-[#CCA43B]/20">
+            <div className="w-16 h-16 rounded-full bg-[#2E7D32]/20 flex items-center justify-center mx-auto mb-5">
+              <CheckCircle2 className="w-8 h-8 text-[#2E7D32]" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-2xl font-bold text-white mb-3">
               Application Submitted!
             </h2>
-            <p className="text-[#B3B3B3] text-lg mb-8">
+            <p className="text-[#B3B3B3] text-base mb-6">
               Thank you for applying. Our team will review your application and get back to you within 5 minutes.
             </p>
             <Button
               onClick={() => setIsSubmitted(false)}
-              className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white font-semibold"
+              className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white font-semibold text-sm"
             >
               Submit Another Application
             </Button>
@@ -111,23 +111,23 @@ export default function ApplicationForm() {
   }
 
   return (
-    <section id="apply-form" className="py-20 bg-[#121212]">
+    <section id="apply-form" className="py-12 bg-[#121212]">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
               Apply for Your Loan
             </h2>
-            <p className="text-[#B3B3B3] text-lg">
+            <p className="text-[#B3B3B3] text-base">
               Fill in your details and get instant approval
             </p>
           </div>
 
-          <div className="bg-[#1E1E1E] rounded-2xl p-8 border border-white/5">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="bg-[#1E1E1E] rounded-2xl p-6 border border-white/5">
+            <form onSubmit={handleSubmit} className="space-y-5">
               {/* Name Field */}
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-white">
+                <Label htmlFor="name" className="text-white text-sm">
                   Full Name *
                 </Label>
                 <Input
@@ -137,7 +137,7 @@ export default function ApplicationForm() {
                   value={formData.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`bg-[#121212] border-white/10 text-white focus:border-[#CCA43B] ${
+                  className={`bg-[#121212] border-white/10 text-white text-sm focus:border-[#CCA43B] ${
                     errors.name && touched.name
                       ? "border-[#C62828]"
                       : touched.name && !errors.name
@@ -156,7 +156,7 @@ export default function ApplicationForm() {
 
               {/* Phone Field */}
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-white">
+                <Label htmlFor="phone" className="text-white text-sm">
                   Mobile Number *
                 </Label>
                 <Input
@@ -166,7 +166,7 @@ export default function ApplicationForm() {
                   value={formData.phone}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`bg-[#121212] border-white/10 text-white focus:border-[#CCA43B] ${
+                  className={`bg-[#121212] border-white/10 text-white text-sm focus:border-[#CCA43B] ${
                     errors.phone && touched.phone
                       ? "border-[#C62828]"
                       : touched.phone && !errors.phone
@@ -185,7 +185,7 @@ export default function ApplicationForm() {
 
               {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-white">
+                <Label htmlFor="email" className="text-white text-sm">
                   Email Address *
                 </Label>
                 <Input
@@ -195,7 +195,7 @@ export default function ApplicationForm() {
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`bg-[#121212] border-white/10 text-white focus:border-[#CCA43B] ${
+                  className={`bg-[#121212] border-white/10 text-white text-sm focus:border-[#CCA43B] ${
                     errors.email && touched.email
                       ? "border-[#C62828]"
                       : touched.email && !errors.email
@@ -214,7 +214,7 @@ export default function ApplicationForm() {
 
               {/* Amount Field */}
               <div className="space-y-2">
-                <Label htmlFor="amount" className="text-white">
+                <Label htmlFor="amount" className="text-white text-sm">
                   Loan Amount (₹) *
                 </Label>
                 <Input
@@ -224,7 +224,7 @@ export default function ApplicationForm() {
                   value={formData.amount}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`bg-[#121212] border-white/10 text-white focus:border-[#CCA43B] ${
+                  className={`bg-[#121212] border-white/10 text-white text-sm focus:border-[#CCA43B] ${
                     errors.amount && touched.amount
                       ? "border-[#C62828]"
                       : touched.amount && !errors.amount
@@ -242,15 +242,15 @@ export default function ApplicationForm() {
               </div>
 
               {/* Trust Indicators */}
-              <div className="flex items-center gap-2 text-[#B3B3B3] text-sm bg-[#121212] p-4 rounded-lg">
-                <Shield className="w-5 h-5 text-[#CCA43B]" />
+              <div className="flex items-center gap-2 text-[#B3B3B3] text-sm bg-[#121212] p-3 rounded-lg">
+                <Shield className="w-4 h-4 text-[#CCA43B]" />
                 <span>Your information is encrypted and secure</span>
               </div>
 
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white font-semibold text-lg py-6 h-auto rounded-full transition-all duration-300 hover:scale-105"
+                className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white font-semibold text-sm py-3 h-auto rounded-lg transition-all duration-300 hover:scale-105"
               >
                 Submit Application
               </Button>

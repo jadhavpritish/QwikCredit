@@ -27,9 +27,9 @@ const benefits = [
 
 export default function BenefitsGrid() {
   return (
-    <section className="py-16 bg-[#121212]">
+    <section className="py-12 bg-[#121212]">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             Why Choose QwikCredit?
           </h2>
