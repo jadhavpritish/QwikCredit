@@ -30,7 +30,8 @@ export default function StickyCTA({ onCtaClick }: StickyCTAProps = {}) {
       <div className="bg-[#121212]/95 backdrop-blur-lg border-t border-white/10 p-4 shadow-2xl">
         <Button
           onClick={onCtaClick}
-          className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white font-semibold py-6 h-auto rounded-full transition-all duration-300 hover:scale-105"
+          variant="gradient"
+          className="w-full font-semibold py-6 h-auto rounded-full"
         >
           Apply Now
           <ArrowRight className="ml-2 h-5 w-5" />

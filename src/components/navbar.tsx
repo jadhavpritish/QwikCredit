@@ -24,8 +24,8 @@ export default function Navbar() {
           {/* Login Button */}
           <Button
             onClick={handleLoginClick}
-            variant="outline"
-            className="border-[#CCA43B] text-[#CCA43B] hover:bg-[#CCA43B] hover:text-white transition-all duration-300"
+            variant="gradient"
+            className="transition-all duration-300"
           >
             Login
           </Button>

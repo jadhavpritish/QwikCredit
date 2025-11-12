@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -15,6 +15,7 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   
   // Form data
   const [mobile, setMobile] = useState("");
@@ -24,6 +25,10 @@ export default function OnboardingPage() {
   const [dob, setDob] = useState<Date>();
   const [employmentType, setEmploymentType] = useState("");
   const [income, setIncome] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Mascot states
   const mascotEmojis = ["📱", "🔐", "🎯", "💰", "🎉"];
@@ -88,28 +93,37 @@ export default function OnboardingPage() {
       />
 
       {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-[#CCA43B] rounded-full"
-            initial={{ 
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000), 
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
-              opacity: 0 
-            }}
-            animate={{ 
-              y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000)],
-              opacity: [0, 0.6, 0]
-            }}
-            transition={{
-              duration: 5 + Math.random() * 5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
+      {mounted && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(15)].map((_, i) => {
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+            const randomEndY = Math.random() * window.innerHeight;
+            const randomDuration = 5 + Math.random() * 5;
+            
+            return (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-[#CCA43B] rounded-full"
+                initial={{ 
+                  x: randomX, 
+                  y: randomY,
+                  opacity: 0 
+                }}
+                animate={{ 
+                  y: [null, randomEndY],
+                  opacity: [0, 0.6, 0]
+                }}
+                transition={{
+                  duration: randomDuration,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            );
+          })}
+        </div>
+      )}
 
       <div className="w-full max-w-md relative z-10">
         {/* Abandon Button */}

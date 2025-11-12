@@ -100,7 +100,8 @@ export default function ApplicationForm() {
             </p>
             <Button
               onClick={() => setIsSubmitted(false)}
-              className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white font-semibold text-sm"
+              variant="gradient"
+              className="font-semibold text-sm"
             >
               Submit Another Application
             </Button>
@@ -250,7 +251,8 @@ export default function ApplicationForm() {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white font-semibold text-sm py-3 h-auto rounded-lg transition-all duration-300 hover:scale-105"
+                variant="gradient"
+                className="w-full font-semibold text-sm py-3 h-auto rounded-lg"
               >
                 Submit Application
               </Button>

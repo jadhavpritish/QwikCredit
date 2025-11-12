@@ -233,7 +233,8 @@ export default function DashboardPage() {
                   <Button
                     onClick={handleBorrowSubmit}
                     disabled={!borrowAmount || parseInt(borrowAmount) <= 0 || parseInt(borrowAmount) > userData.available}
-                    className="flex-1 bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white text-sm"
+                    variant="gradient"
+                    className="flex-1 text-sm"
                   >
                     Submit
                   </Button>
@@ -287,7 +288,8 @@ export default function DashboardPage() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   onClick={() => setShowCongrats(false)}
-                  className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white text-sm"
+                  variant="gradient"
+                  className="w-full text-sm"
                 >
                   <Sparkles className="h-4 w-4 mr-2" />
                   Awesome!
@@ -317,7 +319,8 @@ export default function DashboardPage() {
                 <Button 
                   onClick={handleBorrowMore}
                   disabled={userData.borrowed >= userData.creditLine}
-                  className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white text-sm w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                  variant="gradient"
+                  className="text-sm w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Borrow More
@@ -433,7 +436,7 @@ export default function DashboardPage() {
                       <span className="text-sm text-white font-medium">{userData.nextPayment.date}</span>
                     </div>
                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                      <Button className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white mt-3 text-sm">
+                      <Button variant="gradient" className="w-full mt-3 text-sm">
                         Pay Now
                       </Button>
                     </motion.div>
@@ -551,7 +554,7 @@ export default function DashboardPage() {
                   />
                 </div>
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-white text-sm">
+                  <Button variant="gradient" className="w-full text-sm">
                     Update Profile
                   </Button>
                 </motion.div>
